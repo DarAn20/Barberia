@@ -11,8 +11,8 @@ namespace Barberia.Models
         public int ClienteId { get; set; }
 
         //Clave foranea uno a muchos
-        [ForeignKey("ServicioId")]
-        public int ServicioId { get; set; } 
-        public Servicio Servicio { get; set; }
+        //[ForeignKey("ServicioId")]
+       // public int ServicioId { get; set; } 
+       // public Servicio Servicio { get; set; }
     }
 }
