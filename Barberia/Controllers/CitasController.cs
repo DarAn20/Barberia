@@ -34,7 +34,7 @@ namespace Barberia.Controllers
             }
 
             var cita = await _context.Cita
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.IdCita == id);
             if (cita == null)
             {
                 return NotFound();
@@ -88,7 +88,7 @@ namespace Barberia.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,FechaHora,ClienteId")] Cita cita)
         {
-            if (id != cita.Id)
+            if (id != cita.IdCita)
             {
                 return NotFound();
             }
@@ -102,7 +102,7 @@ namespace Barberia.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CitaExists(cita.Id))
+                    if (!CitaExists(cita.IdCita))
                     {
                         return NotFound();
                     }
@@ -125,7 +125,7 @@ namespace Barberia.Controllers
             }
 
             var cita = await _context.Cita
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.IdCita == id);
             if (cita == null)
             {
                 return NotFound();
@@ -151,7 +151,7 @@ namespace Barberia.Controllers
 
         private bool CitaExists(int id)
         {
-            return _context.Cita.Any(e => e.Id == id);
+            return _context.Cita.Any(e => e.IdCita == id);
         }
     }
 }

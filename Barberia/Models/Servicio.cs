@@ -5,9 +5,13 @@ namespace Barberia.Models
     public class Servicio
     {
         [Key]
-        public int Id { get; set; }
+        public int IdServicio { get; set; }
         public string Nombre { get; set; }
         public string Descripcion { get; set; }
         public decimal Precio { get; set; }
+
+        //Ppropiedades de navegacion
+        public ICollection<Cita> Citas { get; set; }= new List<Cita>();
+
     }
 }

@@ -34,7 +34,7 @@ namespace Barberia.Controllers
             }
 
             var servicio = await _context.Servicio
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.IdServicio == id);
             if (servicio == null)
             {
                 return NotFound();
@@ -88,7 +88,7 @@ namespace Barberia.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Nombre,Descripcion,Precio")] Servicio servicio)
         {
-            if (id != servicio.Id)
+            if (id != servicio.IdServicio)
             {
                 return NotFound();
             }
@@ -102,7 +102,7 @@ namespace Barberia.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ServicioExists(servicio.Id))
+                    if (!ServicioExists(servicio.IdServicio))
                     {
                         return NotFound();
                     }
@@ -125,7 +125,7 @@ namespace Barberia.Controllers
             }
 
             var servicio = await _context.Servicio
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.IdServicio == id);
             if (servicio == null)
             {
                 return NotFound();
@@ -151,7 +151,7 @@ namespace Barberia.Controllers
 
         private bool ServicioExists(int id)
         {
-            return _context.Servicio.Any(e => e.Id == id);
+            return _context.Servicio.Any(e => e.IdServicio == id);
         }
     }
 }
