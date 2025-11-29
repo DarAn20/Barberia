@@ -5,7 +5,7 @@ namespace Barberia.Models
     public class Servicio
     {
         [Key]
-        public int IdServicio { get; set; }
+        public int Id { get; set; }
         public string Nombre { get; set; }
         public string Descripcion { get; set; }
         public decimal Precio { get; set; }

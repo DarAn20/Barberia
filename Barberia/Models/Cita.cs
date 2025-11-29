@@ -6,7 +6,7 @@ namespace Barberia.Models
     public class Cita
     {
         [Key]
-        public int IdCita { get; set; }
+        public int Id { get; set; }
         public DateTime FechaHora { get; set; }
         public int ClienteId { get; set; }
 
