@@ -11,7 +11,7 @@ namespace Barberia.Models
         public decimal Precio { get; set; }
 
         //Ppropiedades de navegacion
-       // public ICollection<Cita> Citas { get; set; }= new List<Cita>();
+        //public ICollection<Cita> Citas { get; set; }= new List<Cita>();
 
     }
 }

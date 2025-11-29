@@ -36,7 +36,12 @@ namespace Barberia.Migrations
                     b.Property<DateTime>("FechaHora")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("ServicioId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("ServicioId");
 
                     b.ToTable("Cita");
                 });
@@ -92,6 +97,22 @@ namespace Barberia.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("cliente");
+                });
+
+            modelBuilder.Entity("Barberia.Models.Cita", b =>
+                {
+                    b.HasOne("Barberia.Models.Servicio", "Servicio")
+                        .WithMany("Citas")
+                        .HasForeignKey("ServicioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Servicio");
+                });
+
+            modelBuilder.Entity("Barberia.Models.Servicio", b =>
+                {
+                    b.Navigation("Citas");
                 });
 #pragma warning restore 612, 618
         }
