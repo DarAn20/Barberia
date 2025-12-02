@@ -1,47 +1,66 @@
 ﻿@model IEnumerable<Barberia.Models.Servicio>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Servicios";
 }
 
-<h1>SERVICIOS</h1>
+<div class="container py-4">
 
-<p>
-    <a asp-action="Create">Crear Servicio Nuevo</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Nombre)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Descripcion)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Precio)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nombre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Descripcion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Precio)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ServicioId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ServicioId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ServicioId">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    <div class="text-center mb-4">
+        <h1 class="fw-bold text-dark">Nuestros Servicios</h1>
+        <p class="text-muted">Gestione, edite y administre los servicios ofrecidos en la barbería.</p>
+    </div>
+
+    <!-- Botón Crear -->
+    <div class="d-flex justify-content-end mb-3">
+        <a asp-action="Create" class="btn btn-primary shadow-sm">
+            <i class="fa fa-plus-circle me-1"></i> Crear Servicio
+        </a>
+    </div>
+
+    <!-- Tabla -->
+    <div class="card shadow-lg border-0">
+        <div class="card-header bg-dark text-white">
+            <h5 class="mb-0"><i class="fa fa-scissors me-2"></i>Listado de Servicios</h5>
+        </div>
+
+        <div class="card-body p-0">
+            <table class="table table-hover align-middle mb-0">
+                <thead class="table-dark">
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.Nombre)</th>
+                        <th>@Html.DisplayNameFor(model => model.Descripcion)</th>
+                        <th>@Html.DisplayNameFor(model => model.Precio)</th>
+                        <th class="text-center">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="fw-bold">@Html.DisplayFor(modelItem => item.Nombre)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Descripcion)</td>
+                            <td>
+                                <span class="badge bg-warning text-dark fs-6">
+                                    ₡ @Html.DisplayFor(modelItem => item.Precio)
+                                </span>
+                            </td>
+                            <td class="text-center">
+                                <a asp-action="Edit" asp-route-id="@item.ServicioId" class="btn btn-sm btn-outline-primary me-1">
+                                    <i class="fa fa-edit"></i>
+                                </a>
+                                <a asp-action="Details" asp-route-id="@item.ServicioId" class="btn btn-sm btn-outline-secondary me-1">
+                                    <i class="fa fa-eye"></i>
+                                </a>
+                                <a asp-action="Delete" asp-route-id="@item.ServicioId" class="btn btn-sm btn-outline-danger">
+                                    <i class="fa fa-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>

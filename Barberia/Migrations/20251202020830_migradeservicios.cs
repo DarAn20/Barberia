@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Barberia.Migrations
 {
     /// <inheritdoc />
-    public partial class migra2 : Migration
+    public partial class migradeservicios : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -49,11 +49,18 @@ namespace Barberia.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     FechaHora = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ClienteId = table.Column<int>(type: "int", nullable: false)
+                    ClienteId = table.Column<int>(type: "int", nullable: false),
+                    ServicioId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Cita", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Cita_Servicio_ServicioId",
+                        column: x => x.ServicioId,
+                        principalTable: "Servicio",
+                        principalColumn: "ServicioId",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Cita_cliente_ClienteId",
                         column: x => x.ClienteId,
@@ -66,6 +73,11 @@ namespace Barberia.Migrations
                 name: "IX_Cita_ClienteId",
                 table: "Cita",
                 column: "ClienteId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Cita_ServicioId",
+                table: "Cita",
+                column: "ServicioId");
         }
 
         /// <inheritdoc />

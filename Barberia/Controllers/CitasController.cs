@@ -22,7 +22,7 @@ namespace Barberia.Controllers
         // GET: Citas
         public async Task<IActionResult> Index()
         {
-            var barberiaContext = _context.Cita.Include(c => c.cliente);
+            var barberiaContext = _context.Cita.Include(c => c.Servicio).Include(c => c.cliente);
             return View(await barberiaContext.ToListAsync());
         }
 
@@ -35,6 +35,7 @@ namespace Barberia.Controllers
             }
 
             var cita = await _context.Cita
+                .Include(c => c.Servicio)
                 .Include(c => c.cliente)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (cita == null)
@@ -48,6 +49,7 @@ namespace Barberia.Controllers
         // GET: Citas/Create
         public IActionResult Create()
         {
+            ViewData["ServicioId"] = new SelectList(_context.Servicio, "ServicioId", "ServicioId");
             ViewData["ClienteId"] = new SelectList(_context.cliente, "ClienteId", "ClienteId");
             return View();
         }
@@ -57,14 +59,21 @@ namespace Barberia.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,FechaHora,ClienteId")] Cita cita)
+        public async Task<IActionResult> Create([Bind("Id,FechaHora,ClienteId,ServicioId")] Cita cita)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(cita);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+            try 
+            {    
+                    _context.Add(cita);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                
             }
+            catch (DbUpdateException /* ex */)
+            {
+                //Log the error (uncomment ex variable name and write a log.)
+                ModelState.AddModelError("", "No se pudo guardar los cambios. Intente de nuevo, y si el problema persiste vea al administrador del sistema.");
+            }
+            ViewData["ServicioId"] = new SelectList(_context.Servicio, "ServicioId", "ServicioId", cita.ServicioId);
             ViewData["ClienteId"] = new SelectList(_context.cliente, "ClienteId", "ClienteId", cita.ClienteId);
             return View(cita);
         }
@@ -82,6 +91,7 @@ namespace Barberia.Controllers
             {
                 return NotFound();
             }
+            ViewData["ServicioId"] = new SelectList(_context.Servicio, "ServicioId", "ServicioId", cita.ServicioId);
             ViewData["ClienteId"] = new SelectList(_context.cliente, "ClienteId", "ClienteId", cita.ClienteId);
             return View(cita);
         }
@@ -91,7 +101,7 @@ namespace Barberia.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,FechaHora,ClienteId")] Cita cita)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,FechaHora,ClienteId,ServicioId")] Cita cita)
         {
             if (id != cita.Id)
             {
@@ -118,6 +128,7 @@ namespace Barberia.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["ServicioId"] = new SelectList(_context.Servicio, "ServicioId", "ServicioId", cita.ServicioId);
             ViewData["ClienteId"] = new SelectList(_context.cliente, "ClienteId", "ClienteId", cita.ClienteId);
             return View(cita);
         }
@@ -131,6 +142,7 @@ namespace Barberia.Controllers
             }
 
             var cita = await _context.Cita
+                .Include(c => c.Servicio)
                 .Include(c => c.cliente)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (cita == null)

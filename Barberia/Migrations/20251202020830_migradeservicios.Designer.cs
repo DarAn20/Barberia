@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Barberia.Migrations
 {
     [DbContext(typeof(BarberiaContext))]
-    [Migration("20251202002634_migra1")]
-    partial class migra1
+    [Migration("20251202020830_migradeservicios")]
+    partial class migradeservicios
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -39,9 +39,14 @@ namespace Barberia.Migrations
                     b.Property<DateTime>("FechaHora")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("ServicioId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ClienteId");
+
+                    b.HasIndex("ServicioId");
 
                     b.ToTable("Cita");
                 });
@@ -106,6 +111,14 @@ namespace Barberia.Migrations
                         .HasForeignKey("ClienteId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("Barberia.Models.Servicio", "Servicio")
+                        .WithMany()
+                        .HasForeignKey("ServicioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Servicio");
 
                     b.Navigation("cliente");
                 });

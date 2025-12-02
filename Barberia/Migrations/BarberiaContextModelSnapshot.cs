@@ -36,9 +36,14 @@ namespace Barberia.Migrations
                     b.Property<DateTime>("FechaHora")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("ServicioId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ClienteId");
+
+                    b.HasIndex("ServicioId");
 
                     b.ToTable("Cita");
                 });
@@ -103,6 +108,14 @@ namespace Barberia.Migrations
                         .HasForeignKey("ClienteId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("Barberia.Models.Servicio", "Servicio")
+                        .WithMany()
+                        .HasForeignKey("ServicioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Servicio");
 
                     b.Navigation("cliente");
                 });

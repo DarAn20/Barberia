@@ -1,29 +1,115 @@
 ﻿@{
     ViewData["Title"] = "Inicio";
 }
-<div class="row g-4 align-items-center">
-    <div class="col-lg-7">
-        <div class="welcome-hero shadow-sm">
-            <h1 class="display-6">Bienvenido a <span class="text-primary">Barbería El Corte</span></h1>
-            <p class="lead">Administra clientes, servicios y citas con una interfaz clara y lista para integrar login y roles.</p>
-            <p class="small-muted">Diseñado para ser sencillo: en el futuro podrás agregar autenticación y roles sin cambiar el layout.</p>
 
-          
+<style>
+    body {
+        background: linear-gradient(135deg, #1e1e1e, #2c2c2c);
+        color: #e5e5e5;
+        font-family: 'Segoe UI', sans-serif;
+    }
 
-        </div>
+    .welcome-hero {
+        padding: 40px;
+        background: #242424;
+        border-radius: 18px;
+        border: 1px solid #3a3a3a;
+        backdrop-filter: blur(6px);
+        transition: transform .2s ease;
+    }
 
-        <div class="mt-4">
-            <h5>Resumen</h5>
-            <p class="small-muted">Muestra aquí indicadores rápidos (opcional): número de citas hoy, servicios más populares, clientes frecuentes.</p>
+        .welcome-hero:hover {
+            transform: translateY(-4px);
+        }
+
+    .section-title {
+        border-left: 5px solid #ffc107;
+        padding-left: 12px;
+        font-weight: 600;
+    }
+
+    .card-custom {
+        background: #242424;
+        color: #e5e5e5;
+        border: 1px solid #3a3a3a;
+        border-radius: 16px;
+        transition: 0.2s ease;
+    }
+
+        .card-custom:hover {
+            transform: translateY(-4px);
+            border-color: #ffc107;
+        }
+
+    .btn-primary {
+        background-color: #ffc107;
+        border: none;
+        color: #000;
+        font-weight: 600;
+        transition: 0.2s ease;
+    }
+
+        .btn-primary:hover {
+            background-color: #ffb300;
+            color: #000;
+        }
+
+    .small-muted {
+        color: #bdbdbd;
+        font-size: 0.9rem;
+    }
+</style>
+
+<div class="row g-5 mt-2">
+    <div class="col-12">
+        <div class="welcome-hero shadow">
+            <h1 class="display-5 fw-bold text-light">
+                Bienvenido a <span class="text-warning">Barbería El Corte</span>
+            </h1>
+
+            <p class="lead mt-3">
+                Administra clientes, servicios y citas con una interfaz profesional y moderna,
+                diseñada para crecer con características como roles y autenticación.
+            </p>
+
+            <p class="small-muted">
+                Aquí podrás gestionar todo lo esencial para que tu barbería funcione con precisión.
+            </p>
+
+            <div class="mt-4 d-flex gap-3 flex-column">
+                <a asp-controller="Clientes" asp-action="Index" class="btn btn-primary btn-lg w-100 shadow-sm">
+                    Gestionar Clientes
+                </a>
+
+                <a asp-controller="Servicios" asp-action="Index" class="btn btn-outline-light btn-lg w-100 shadow-sm">
+                    Ver Servicios
+                </a>
+
+                <a asp-controller="Citas" asp-action="Index" class="btn btn-outline-warning btn-lg w-100 shadow-sm">
+                    Administrar Citas
+                </a>
+            </div>
         </div>
     </div>
 
-    <div class="col-lg-5">
-        <div class="card shadow-sm">
+    <div class="col-12">
+        <h4 class="section-title text-light">Resumen</h4>
+        <p class="small-muted">
+            Indicadores rápidos (próximamente): citas del día, servicios más utilizados, clientes frecuentes.
+        </p>
+    </div>
+
+    <div class="col-12">
+        <div class="card card-custom shadow-sm p-3">
             <div class="card-body">
-                <h5 class="card-title">Próximas citas</h5>
-                <p class="card-text">Muestra una lista corta de las 3 próximas citas (esto puede llenarse con el modelo en el futuro).</p>
-                <a href="/Citas" class="btn btn-sm btn-primary">Ir a Citas</a>
+                <h5 class="card-title fw-bold text-warning">Próximas Citas</h5>
+                <p class="card-text small-muted">
+                    Aquí aparecerán las 3 próximas citas programadas (este contenido se cargará dinámicamente).
+                </p>
+
+                <a asp-controller="Citas" asp-action="Index" class="btn btn-primary btn-sm">
+                    Ir a Citas
+                </a>
             </div>
         </div>
     </div>

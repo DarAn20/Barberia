@@ -8,16 +8,19 @@ namespace Barberia.Models
         [Key]
         public int Id { get; set; }
 
+        [Required]
         public DateTime FechaHora { get; set; }
 
-        // FK hacia Cliente
+        // ---------------- Client --------------------
         public int ClienteId { get; set; }
 
         [ForeignKey("ClienteId")]
         public cliente cliente { get; set; }
 
-        // Si más adelante querés agregar Servicio:
-        // public int ServicioId { get; set; }
-        // public Servicio Servicio { get; set; }
+        // ---------------- Servicio --------------------
+        public int ServicioId { get; set; }
+
+        [ForeignKey("ServicioId")]
+        public Servicio Servicio { get; set; }
     }
 }
