@@ -1,8 +1,30 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Inicio";
 }
+<div class="row g-4 align-items-center">
+    <div class="col-lg-7">
+        <div class="welcome-hero shadow-sm">
+            <h1 class="display-6">Bienvenido a <span class="text-primary">Barbería El Corte</span></h1>
+            <p class="lead">Administra clientes, servicios y citas con una interfaz clara y lista para integrar login y roles.</p>
+            <p class="small-muted">Diseñado para ser sencillo: en el futuro podrás agregar autenticación y roles sin cambiar el layout.</p>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+          
+
+        </div>
+
+        <div class="mt-4">
+            <h5>Resumen</h5>
+            <p class="small-muted">Muestra aquí indicadores rápidos (opcional): número de citas hoy, servicios más populares, clientes frecuentes.</p>
+        </div>
+    </div>
+
+    <div class="col-lg-5">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title">Próximas citas</h5>
+                <p class="card-text">Muestra una lista corta de las 3 próximas citas (esto puede llenarse con el modelo en el futuro).</p>
+                <a href="/Citas" class="btn btn-sm btn-primary">Ir a Citas</a>
+            </div>
+        </div>
+    </div>
 </div>

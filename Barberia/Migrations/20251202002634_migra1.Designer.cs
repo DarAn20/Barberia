@@ -12,15 +12,15 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Barberia.Migrations
 {
     [DbContext(typeof(BarberiaContext))]
-    [Migration("20251129165913_primerMigracion")]
-    partial class primerMigracion
+    [Migration("20251202002634_migra1")]
+    partial class migra1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.21")
+                .HasAnnotation("ProductVersion", "8.0.20")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -41,16 +41,18 @@ namespace Barberia.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ClienteId");
+
                     b.ToTable("Cita");
                 });
 
             modelBuilder.Entity("Barberia.Models.Servicio", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("ServicioId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ServicioId"));
 
                     b.Property<string>("Descripcion")
                         .IsRequired()
@@ -63,18 +65,18 @@ namespace Barberia.Migrations
                     b.Property<decimal>("Precio")
                         .HasColumnType("decimal(18,2)");
 
-                    b.HasKey("Id");
+                    b.HasKey("ServicioId");
 
                     b.ToTable("Servicio");
                 });
 
             modelBuilder.Entity("Barberia.Models.cliente", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("ClienteId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ClienteId"));
 
                     b.Property<string>("Apellido")
                         .IsRequired()
@@ -92,9 +94,20 @@ namespace Barberia.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("ClienteId");
 
                     b.ToTable("cliente");
+                });
+
+            modelBuilder.Entity("Barberia.Models.Cita", b =>
+                {
+                    b.HasOne("Barberia.Models.cliente", "cliente")
+                        .WithMany()
+                        .HasForeignKey("ClienteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("cliente");
                 });
 #pragma warning restore 612, 618
         }

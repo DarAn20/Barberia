@@ -34,7 +34,7 @@ namespace Barberia.Controllers
             }
 
             var cliente = await _context.cliente
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.ClienteId == id);
             if (cliente == null)
             {
                 return NotFound();
@@ -54,7 +54,7 @@ namespace Barberia.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nombre,Apellido,Telefono,Email")] cliente cliente)
+        public async Task<IActionResult> Create([Bind("ClienteId,Nombre,Apellido,Telefono,Email")] cliente cliente)
         {
             if (ModelState.IsValid)
             {
@@ -86,9 +86,9 @@ namespace Barberia.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nombre,Apellido,Telefono,Email")] cliente cliente)
+        public async Task<IActionResult> Edit(int id, [Bind("ClienteId,Nombre,Apellido,Telefono,Email")] cliente cliente)
         {
-            if (id != cliente.Id)
+            if (id != cliente.ClienteId)
             {
                 return NotFound();
             }
@@ -102,7 +102,7 @@ namespace Barberia.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!clienteExists(cliente.Id))
+                    if (!clienteExists(cliente.ClienteId))
                     {
                         return NotFound();
                     }
@@ -125,7 +125,7 @@ namespace Barberia.Controllers
             }
 
             var cliente = await _context.cliente
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.ClienteId == id);
             if (cliente == null)
             {
                 return NotFound();
@@ -151,7 +151,7 @@ namespace Barberia.Controllers
 
         private bool clienteExists(int id)
         {
-            return _context.cliente.Any(e => e.Id == id);
+            return _context.cliente.Any(e => e.ClienteId == id);
         }
     }
 }

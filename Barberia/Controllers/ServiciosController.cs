@@ -34,7 +34,7 @@ namespace Barberia.Controllers
             }
 
             var servicio = await _context.Servicio
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.ServicioId == id);
             if (servicio == null)
             {
                 return NotFound();
@@ -54,7 +54,7 @@ namespace Barberia.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nombre,Descripcion,Precio")] Servicio servicio)
+        public async Task<IActionResult> Create([Bind("ServicioId,Nombre,Descripcion,Precio")] Servicio servicio)
         {
             if (ModelState.IsValid)
             {
@@ -86,9 +86,9 @@ namespace Barberia.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nombre,Descripcion,Precio")] Servicio servicio)
+        public async Task<IActionResult> Edit(int id, [Bind("ServicioId,Nombre,Descripcion,Precio")] Servicio servicio)
         {
-            if (id != servicio.Id)
+            if (id != servicio.ServicioId)
             {
                 return NotFound();
             }
@@ -102,7 +102,7 @@ namespace Barberia.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ServicioExists(servicio.Id))
+                    if (!ServicioExists(servicio.ServicioId))
                     {
                         return NotFound();
                     }
@@ -125,7 +125,7 @@ namespace Barberia.Controllers
             }
 
             var servicio = await _context.Servicio
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.ServicioId == id);
             if (servicio == null)
             {
                 return NotFound();
@@ -151,7 +151,7 @@ namespace Barberia.Controllers
 
         private bool ServicioExists(int id)
         {
-            return _context.Servicio.Any(e => e.Id == id);
+            return _context.Servicio.Any(e => e.ServicioId == id);
         }
     }
 }

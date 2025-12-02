@@ -22,7 +22,8 @@ namespace Barberia.Controllers
         // GET: Citas
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Cita.ToListAsync());
+            var barberiaContext = _context.Cita.Include(c => c.cliente);
+            return View(await barberiaContext.ToListAsync());
         }
 
         // GET: Citas/Details/5
@@ -34,6 +35,7 @@ namespace Barberia.Controllers
             }
 
             var cita = await _context.Cita
+                .Include(c => c.cliente)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (cita == null)
             {
@@ -46,6 +48,7 @@ namespace Barberia.Controllers
         // GET: Citas/Create
         public IActionResult Create()
         {
+            ViewData["ClienteId"] = new SelectList(_context.cliente, "ClienteId", "ClienteId");
             return View();
         }
 
@@ -62,6 +65,7 @@ namespace Barberia.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["ClienteId"] = new SelectList(_context.cliente, "ClienteId", "ClienteId", cita.ClienteId);
             return View(cita);
         }
 
@@ -78,6 +82,7 @@ namespace Barberia.Controllers
             {
                 return NotFound();
             }
+            ViewData["ClienteId"] = new SelectList(_context.cliente, "ClienteId", "ClienteId", cita.ClienteId);
             return View(cita);
         }
 
@@ -113,6 +118,7 @@ namespace Barberia.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["ClienteId"] = new SelectList(_context.cliente, "ClienteId", "ClienteId", cita.ClienteId);
             return View(cita);
         }
 
@@ -125,6 +131,7 @@ namespace Barberia.Controllers
             }
 
             var cita = await _context.Cita
+                .Include(c => c.cliente)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (cita == null)
             {
