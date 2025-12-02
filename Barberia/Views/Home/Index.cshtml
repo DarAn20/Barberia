@@ -4,16 +4,16 @@
 
 <style>
     body {
-        background: linear-gradient(135deg, #1e1e1e, #2c2c2c);
-        color: #e5e5e5;
+        background: #ffffff; /* Fondo blanco */
+        color: #1e1e1e; /* Texto oscuro para que contraste */
         font-family: 'Segoe UI', sans-serif;
     }
 
     .welcome-hero {
         padding: 40px;
-        background: #242424;
+        background: #f7f7f7; /* Fondo claro para mantener contraste elegante */
         border-radius: 18px;
-        border: 1px solid #3a3a3a;
+        border: 1px solid #dcdcdc;
         backdrop-filter: blur(6px);
         transition: transform .2s ease;
     }
@@ -26,12 +26,13 @@
         border-left: 5px solid #ffc107;
         padding-left: 12px;
         font-weight: 600;
+        color: #1e1e1e;
     }
 
     .card-custom {
-        background: #242424;
-        color: #e5e5e5;
-        border: 1px solid #3a3a3a;
+        background: #f7f7f7;
+        color: #1e1e1e;
+        border: 1px solid #dcdcdc;
         border-radius: 16px;
         transition: 0.2s ease;
     }
@@ -55,8 +56,12 @@
         }
 
     .small-muted {
-        color: #bdbdbd;
+        color: #555555;
         font-size: 0.9rem;
+    }
+
+    .text-light {
+        color: #1e1e1e !important;
     }
 </style>
 
@@ -81,7 +86,7 @@
                     Gestionar Clientes
                 </a>
 
-                <a asp-controller="Servicios" asp-action="Index" class="btn btn-outline-light btn-lg w-100 shadow-sm">
+                <a asp-controller="Servicios" asp-action="Index" class="btn btn-outline-light btn-lg w-100 shadow-sm" style="color:#000; border-color:#000;">
                     Ver Servicios
                 </a>
 
@@ -93,7 +98,7 @@
     </div>
 
     <div class="col-12">
-        <h4 class="section-title text-light">Resumen</h4>
+        <h4 class="section-title">Resumen</h4>
         <p class="small-muted">
             Indicadores rápidos (próximamente): citas del día, servicios más utilizados, clientes frecuentes.
         </p>
