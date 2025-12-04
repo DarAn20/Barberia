@@ -18,7 +18,7 @@
                 <input asp-for="FechaHora" class="form-control" />
                 <span asp-validation-for="FechaHora" class="text-danger"></span>
             </div>
-         
+         <!--Hcaer qeu qedite bien la informacion solo del servicio-->
             <div class="form-group">
                 <label asp-for="ServicioId" class="control-label"></label>
                 <select asp-for="ServicioId" class="form-control" asp-items="ViewBag.ServicioId"></select>
@@ -32,7 +32,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">volver</a>
 </div>
 
 @section Scripts {

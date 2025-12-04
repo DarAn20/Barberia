@@ -18,7 +18,8 @@ namespace Barberia.Controllers
         {
             _context = context;
         }
-
+        //ocupo hacer que sirva y ensene los nombres de los servicios y 
+        //nombre de los clientes
         // GET: Citas
         public async Task<IActionResult> Index()
         {
