@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Barberia.Migrations
 {
     /// <inheritdoc />
-    public partial class migradeservicios : Migration
+    public partial class migradariolocal : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -17,7 +17,7 @@ namespace Barberia.Migrations
                 {
                     ClienteId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Nombre = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    NombreCliente = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Apellido = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Telefono = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false)
@@ -33,7 +33,7 @@ namespace Barberia.Migrations
                 {
                     ServicioId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Nombre = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    NombreServicio = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Descripcion = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Precio = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
                 },
@@ -46,7 +46,7 @@ namespace Barberia.Migrations
                 name: "Cita",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    CitaId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     FechaHora = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ClienteId = table.Column<int>(type: "int", nullable: false),
@@ -54,7 +54,7 @@ namespace Barberia.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Cita", x => x.Id);
+                    table.PrimaryKey("PK_Cita", x => x.CitaId);
                     table.ForeignKey(
                         name: "FK_Cita_Servicio_ServicioId",
                         column: x => x.ServicioId,

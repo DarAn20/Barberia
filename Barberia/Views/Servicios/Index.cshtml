@@ -123,7 +123,7 @@
             <table class="table-custom align-middle mb-0">
                 <thead>
                     <tr>
-                        <th>@Html.DisplayNameFor(model => model.Nombre)</th>
+                        <th>@Html.DisplayNameFor(model => model.NombreServicio)</th>
                         <th>@Html.DisplayNameFor(model => model.Descripcion)</th>
                         <th>@Html.DisplayNameFor(model => model.Precio)</th>
                         <th class="text-center">Acciones</th>
@@ -133,7 +133,7 @@
                     @foreach (var item in Model)
                     {
                         <tr>
-                            <td class="fw-bold">@Html.DisplayFor(modelItem => item.Nombre)</td>
+                            <td class="fw-bold">@Html.DisplayFor(modelItem => item.NombreServicio)</td>
                             <td>@Html.DisplayFor(modelItem => item.Descripcion)</td>
                             <td>
                                 <span class="badge-price">

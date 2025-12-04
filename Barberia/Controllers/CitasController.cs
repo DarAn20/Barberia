@@ -37,7 +37,7 @@ namespace Barberia.Controllers
             var cita = await _context.Cita
                 .Include(c => c.Servicio)
                 .Include(c => c.cliente)
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.CitaId == id);
             if (cita == null)
             {
                 return NotFound();
@@ -59,7 +59,7 @@ namespace Barberia.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,FechaHora,ClienteId,ServicioId")] Cita cita)
+        public async Task<IActionResult> Create([Bind("CitaId,FechaHora,ClienteId,ServicioId")] Cita cita)
         {
             try 
             {    
@@ -101,9 +101,9 @@ namespace Barberia.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,FechaHora,ClienteId,ServicioId")] Cita cita)
+        public async Task<IActionResult> Edit(int id, [Bind("CitaId,FechaHora,ClienteId,ServicioId")] Cita cita)
         {
-            if (id != cita.Id)
+            if (id != cita.CitaId)
             {
                 return NotFound();
             }
@@ -117,7 +117,7 @@ namespace Barberia.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CitaExists(cita.Id))
+                    if (!CitaExists(cita.CitaId))
                     {
                         return NotFound();
                     }
@@ -144,7 +144,7 @@ namespace Barberia.Controllers
             var cita = await _context.Cita
                 .Include(c => c.Servicio)
                 .Include(c => c.cliente)
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.CitaId == id);
             if (cita == null)
             {
                 return NotFound();
@@ -170,7 +170,7 @@ namespace Barberia.Controllers
 
         private bool CitaExists(int id)
         {
-            return _context.Cita.Any(e => e.Id == id);
+            return _context.Cita.Any(e => e.CitaId == id);
         }
     }
 }

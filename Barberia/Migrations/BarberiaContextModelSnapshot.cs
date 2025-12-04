@@ -24,11 +24,11 @@ namespace Barberia.Migrations
 
             modelBuilder.Entity("Barberia.Models.Cita", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("CitaId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CitaId"));
 
                     b.Property<int>("ClienteId")
                         .HasColumnType("int");
@@ -39,7 +39,7 @@ namespace Barberia.Migrations
                     b.Property<int>("ServicioId")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.HasKey("CitaId");
 
                     b.HasIndex("ClienteId");
 
@@ -60,7 +60,7 @@ namespace Barberia.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Nombre")
+                    b.Property<string>("NombreServicio")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -88,7 +88,7 @@ namespace Barberia.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Nombre")
+                    b.Property<string>("NombreCliente")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
