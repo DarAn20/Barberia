@@ -4,118 +4,215 @@
 
 <style>
     body {
-        background: #ffffff; /* Fondo blanco */
-        color: #1e1e1e; /* Texto oscuro para que contraste */
+        background: #fafafa;
+        color: #1e1e1e;
         font-family: 'Segoe UI', sans-serif;
     }
 
-    .welcome-hero {
-        padding: 40px;
-        background: #f7f7f7; /* Fondo claro para mantener contraste elegante */
-        border-radius: 18px;
-        border: 1px solid #dcdcdc;
-        backdrop-filter: blur(6px);
-        transition: transform .2s ease;
+    /* --- EFECTO SUAVE DE APARICIÓN --- */
+    .fade-in {
+        animation: fadeIn 1s ease-in-out;
     }
 
-        .welcome-hero:hover {
-            transform: translateY(-4px);
+    @@keyframes fadeIn {
+        from
+
+    {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    }
+
+    /* --- HERO PRINCIPAL --- */
+    .welcome-hero {
+        padding: 50px;
+        background: linear-gradient(135deg, #ffffff, #f3f3f3);
+        border-radius: 20px;
+        border: 1px solid #e4e4e4;
+        box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.06);
+        transition: 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+        /* brillo suave */
+        .welcome-hero::before {
+            content: "";
+            position: absolute;
+            top: -80px;
+            left: -80px;
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 193, 7, 0.15);
+            border-radius: 50%;
+            filter: blur(40px);
+            animation: pulse 6s infinite ease-in-out;
         }
 
-    .section-title {
-        border-left: 5px solid #ffc107;
-        padding-left: 12px;
-        font-weight: 600;
-        color: #1e1e1e;
+    @@keyframes pulse {
+        0%,100%
+
+    {
+        transform: scale(1);
+        opacity: 0.4;
     }
 
-    .card-custom {
-        background: #f7f7f7;
-        color: #1e1e1e;
-        border: 1px solid #dcdcdc;
-        border-radius: 16px;
+    50% {
+        transform: scale(1.3);
+        opacity: 0.7;
+    }
+
+    }
+
+    .welcome-hero:hover {
+        transform: translateY(-5px);
+    }
+
+    /* TITULO */
+    .hero-title {
+        font-size: 2.7rem;
+        font-weight: 800;
+        color: #1a1a1a;
+    }
+
+    .hero-subtitle {
+        font-size: 1.1rem;
+        color: #4d4d4d;
+        max-width: 650px;
+        margin-top: 10px;
+    }
+
+    /* BOTONES */
+    .btn-gold {
+        background-color: #ffc107;
+        color: #000;
+        border: none;
+        font-weight: 600;
         transition: 0.2s ease;
+    }
+
+        .btn-gold:hover {
+            background-color: #ffbb00;
+            transform: translateY(-2px);
+            box-shadow: 0px 4px 12px rgba(255, 193, 7, 0.45);
+        }
+
+    .btn-outline-black {
+        border: 2px solid #1a1a1a;
+        font-weight: 600;
+        color: #1a1a1a;
+        transition: 0.2s ease;
+    }
+
+        .btn-outline-black:hover {
+            background: #1a1a1a;
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+    .btn-outline-gold {
+        border: 2px solid #ffc107;
+        font-weight: 600;
+        color: #c48d00;
+        transition: 0.2s ease;
+    }
+
+        .btn-outline-gold:hover {
+            background: #ffc107;
+            color: #000;
+            transform: translateY(-2px);
+        }
+
+    /* SECCIÓN RESUMEN */
+    .section-title {
+        border-left: 6px solid #ffc107;
+        padding-left: 12px;
+        font-weight: 700;
+        margin-top: 20px;
+        font-size: 1.4rem;
+    }
+
+    /* CARD */
+    .card-custom {
+        background: #ffffff;
+        border-radius: 16px;
+        border: 1px solid #e0e0e0;
+        transition: .3s ease;
     }
 
         .card-custom:hover {
-            transform: translateY(-4px);
             border-color: #ffc107;
+            transform: translateY(-4px);
+            box-shadow: 0px 4px 15px rgba(255, 193, 7, 0.25);
         }
-
-    .btn-primary {
-        background-color: #ffc107;
-        border: none;
-        color: #000;
-        font-weight: 600;
-        transition: 0.2s ease;
-    }
-
-        .btn-primary:hover {
-            background-color: #ffb300;
-            color: #000;
-        }
-
-    .small-muted {
-        color: #555555;
-        font-size: 0.9rem;
-    }
-
-    .text-light {
-        color: #1e1e1e !important;
-    }
 </style>
 
-<div class="row g-5 mt-2">
+
+<!-- =================== CONTENIDO =================== -->
+<div class="row g-5 mt-2 fade-in">
+
+    <!-- HERO INICIAL -->
     <div class="col-12">
-        <div class="welcome-hero shadow">
-            <h1 class="display-5 fw-bold text-light">
+        <div class="welcome-hero">
+            <h1 class="hero-title">
                 Bienvenido a <span class="text-warning">Barbería El Corte</span>
             </h1>
 
-            <p class="lead mt-3">
-                Administra clientes, servicios y citas con una interfaz profesional y moderna,
-                diseñada para crecer con características como roles y autenticación.
+            <p class="hero-subtitle">
+                Te damos la bienvenida al panel principal donde podrás gestionar clientes, servicios y citas
+                con una plataforma moderna, elegante y diseñada para la administración profesional
+                de tu barbería.
             </p>
 
-            <p class="small-muted">
-                Aquí podrás gestionar todo lo esencial para que tu barbería funcione con precisión.
+            <p class="text-muted mt-2">
+                Organiza tu negocio con precisión y fluye de manera eficiente.
             </p>
 
+            <!-- BOTONES -->
             <div class="mt-4 d-flex gap-3 flex-column">
-                <a asp-controller="Clientes" asp-action="Index" class="btn btn-primary btn-lg w-100 shadow-sm">
+                <a asp-controller="Clientes" asp-action="Index" class="btn btn-gold btn-lg w-100 shadow-sm">
                     Gestionar Clientes
                 </a>
 
-                <a asp-controller="Servicios" asp-action="Index" class="btn btn-outline-light btn-lg w-100 shadow-sm" style="color:#000; border-color:#000;">
+                <a asp-controller="Servicios" asp-action="Index" class="btn btn-outline-black btn-lg w-100 shadow-sm">
                     Ver Servicios
                 </a>
 
-                <a asp-controller="Citas" asp-action="Index" class="btn btn-outline-warning btn-lg w-100 shadow-sm">
+                <a asp-controller="Citas" asp-action="Index" class="btn btn-outline-gold btn-lg w-100 shadow-sm">
                     Administrar Citas
                 </a>
             </div>
         </div>
     </div>
 
+    <!-- SECCIÓN RESUMEN -->
     <div class="col-12">
         <h4 class="section-title">Resumen</h4>
-        <p class="small-muted">
-            Indicadores rápidos (próximamente): citas del día, servicios más utilizados, clientes frecuentes.
+        <p class="text-muted">
+            Indicadores rápidos (próximamente): citas del día, servicios más utilizados y clientes frecuentes.
         </p>
     </div>
 
+    <!-- CARD PRÓXIMAS CITAS -->
     <div class="col-12">
         <div class="card card-custom shadow-sm p-3">
             <div class="card-body">
                 <h5 class="card-title fw-bold text-warning">Próximas Citas</h5>
-                <p class="card-text small-muted">
+                <p class="card-text text-muted">
                     Aquí aparecerán las 3 próximas citas programadas (este contenido se cargará dinámicamente).
                 </p>
 
-                <a asp-controller="Citas" asp-action="Index" class="btn btn-primary btn-sm">
+                <a asp-controller="Citas" asp-action="Index" class="btn btn-gold btn-sm">
                     Ir a Citas
                 </a>
             </div>
         </div>
     </div>
+
 </div>

@@ -4,10 +4,14 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<div class="text-center mb-4">
+<h1 class="fw-bold">CLIENTE</h1>
+<div class="mx-auto" style="width: 80px; height: 3px; background-color: #ffc107;"></div>
+<p class="text-muted mt-2">Información del Cliente</p>
+</div>
 
 <div>
-    <h4>cliente</h4>
+   
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -37,6 +41,5 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.ClienteId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a class="btn btn-warning" asp-action="Index">Volver Pagina</a>
 </div>

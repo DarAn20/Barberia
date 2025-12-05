@@ -8,10 +8,12 @@ namespace Barberia.Models
         public int ClienteId { get; set; }
         
         [Required]
+        [Display(Name = "Nombre")]
         public string NombreCliente { get; set; }
         public string Apellido { get; set; }
         [Required]
         public string Telefono { get; set; }
         public string Email { get; set; }
+
     }
 }
