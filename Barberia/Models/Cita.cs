@@ -13,8 +13,6 @@ namespace Barberia.Models
         public DateTime FechaHora { get; set; }
 
         // ---------------- Client --------------------
-        
-        public int ClienteId { get; set; }
         [Display(Name = "Nombre Cliente")]
         [ForeignKey("ClienteId")]
         public cliente cliente { get; set; }

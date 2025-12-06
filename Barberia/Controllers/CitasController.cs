@@ -2,11 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using Barberia.Data;
-using Barberia.Models;
 
 namespace Barberia.Controllers
 {
@@ -129,9 +124,6 @@ namespace Barberia.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ServicioId"] = new SelectList(_context.Servicio, "ServicioId", "ServicioId", cita.ServicioId);
-            ViewData["ClienteId"] = new SelectList(_context.cliente, "ClienteId", "ClienteId", cita.ClienteId);
-            return View(cita);
         }
 
         // GET: Citas/Delete/5
