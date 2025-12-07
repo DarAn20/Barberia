@@ -1,9 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Barberia.Data;
+using Barberia.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
+
+
 
 namespace Barberia.Controllers
+
 {
     public class CitasController : Controller
     {
@@ -105,7 +109,7 @@ namespace Barberia.Controllers
             }
 
             if (ModelState.IsValid)
-            {
+            { 
                 try
                 {
                     _context.Update(cita);
@@ -124,6 +128,11 @@ namespace Barberia.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            // Si el modelo no es válido, vuelve a mostrar el formulario con los datos actuales
+            ViewData["ServicioId"] = new SelectList(_context.Servicio, "ServicioId", "ServicioId", cita.ServicioId);
+            ViewData["ClienteId"] = new SelectList(_context.cliente, "ClienteId", "ClienteId", cita.ClienteId);
+            return View(cita);
+            ////////////////////////////////////////
         }
 
         // GET: Citas/Delete/5

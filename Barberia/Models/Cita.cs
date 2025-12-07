@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System;
 
 namespace Barberia.Models
 {
@@ -23,5 +24,6 @@ namespace Barberia.Models
 
         [ForeignKey("ServicioId")]
         public Servicio Servicio { get; set; }
+        public int ClienteId { get; set; }
     }
 }
