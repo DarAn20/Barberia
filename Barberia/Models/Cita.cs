@@ -6,18 +6,19 @@ namespace Barberia.Models
     public class Cita
     {
         [Key]
-        public int Id { get; set; }
+        public int CitaId { get; set; }
 
         [Required]
+        [Display(Name = "Fecha y Hora")]
         public DateTime FechaHora { get; set; }
 
         // ---------------- Client --------------------
-        public int ClienteId { get; set; }
-
+        [Display(Name = "Nombre Cliente")]
         [ForeignKey("ClienteId")]
         public cliente cliente { get; set; }
 
         // ---------------- Servicio --------------------
+        [Display(Name = "Nombre del Servicio")]
         public int ServicioId { get; set; }
 
         [ForeignKey("ServicioId")]

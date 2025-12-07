@@ -63,36 +63,60 @@
         .action-links a:hover {
             color: #ffc107;
         }
+
+    .table-custom {
+        background-color: #212529;
+        color: white;
+    }
+
+        .table-custom thead th {
+            background-color: #343a40;
+            color: white;
+        }
+
+        .table-custom tbody tr:hover {
+            background-color: #495057;
+        }
+
 </style>
 
-<h1 class="page-title">Clientes</h1>
+<div class="text-center mb-4">
+    <h1 class="page-title text-center d-inline-block">Nuestros Clientes</h1>
+    <p class="subtitle-muted">Gestione, edite y administre los clientes en la barbería.</p>
+</div>
 
 <p>
-    <a asp-action="Create" class="btn-custom-primary shadow-sm">Nuevo Usuario</a>
+    <a asp-action="Create" class="btn-custom-primary shadow-sm">Nuevo Cliente</a>
 </p>
 
-<table class="table-custom">
+<table class="table table-striped table-hover table-custom align-middle mb-0">
     <thead>
         <tr>
-            <th>@Html.DisplayNameFor(model => model.Nombre)</th>
+            <th>@Html.DisplayNameFor(model => model.NombreCliente)</th>
             <th>@Html.DisplayNameFor(model => model.Apellido)</th>
             <th>@Html.DisplayNameFor(model => model.Telefono)</th>
             <th>@Html.DisplayNameFor(model => model.Email)</th>
-            <th></th>
+            <th>Acciones</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
             <tr>
-                <td>@Html.DisplayFor(modelItem => item.Nombre)</td>
+                <td>@Html.DisplayFor(modelItem => item.NombreCliente)</td>
                 <td>@Html.DisplayFor(modelItem => item.Apellido)</td>
                 <td>@Html.DisplayFor(modelItem => item.Telefono)</td>
                 <td>@Html.DisplayFor(modelItem => item.Email)</td>
-                <td class="action-links">
-                    <a asp-action="Edit" asp-route-id="@item.ClienteId">Editar</a> |
-                    <a asp-action="Details" asp-route-id="@item.ClienteId">Detalles</a> |
-                    <a asp-action="Delete" asp-route-id="@item.ClienteId">Eliminar</a>
+                <td class="text-center action-buttons">
+                    <a asp-action="Edit" asp-route-id="@item.ClienteId" class="btn btn-sm btn-outline-primary me-1">
+                        <i class="fa fa-edit"></i>
+                    </a>
+                    <a asp-action="Details" asp-route-id="@item.ClienteId" class="btn btn-sm btn-outline-secondary me-1">
+                        <i class="fa fa-eye"></i>
+                    </a>
+                    <a asp-action="Delete" asp-route-id="@item.ClienteId" class="btn btn-sm btn-outline-danger">
+                        <i class="fa fa-trash"></i>
+                    </a>
                 </td>
             </tr>
         }

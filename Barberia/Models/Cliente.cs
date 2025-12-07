@@ -6,9 +6,14 @@ namespace Barberia.Models
     {
         [Key]
         public int ClienteId { get; set; }
-        public string Nombre { get; set; }
+        
+        [Required]
+        [Display(Name = "Nombre")]
+        public string NombreCliente { get; set; }
         public string Apellido { get; set; }
+        [Required]
         public string Telefono { get; set; }
         public string Email { get; set; }
+
     }
 }

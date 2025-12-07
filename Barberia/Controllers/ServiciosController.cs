@@ -54,7 +54,7 @@ namespace Barberia.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ServicioId,Nombre,Descripcion,Precio")] Servicio servicio)
+        public async Task<IActionResult> Create([Bind("ServicioId,NombreServicio,Descripcion,Precio")] Servicio servicio)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +86,7 @@ namespace Barberia.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ServicioId,Nombre,Descripcion,Precio")] Servicio servicio)
+        public async Task<IActionResult> Edit(int id, [Bind("ServicioId,NombreServicio,Descripcion,Precio")] Servicio servicio)
         {
             if (id != servicio.ServicioId)
             {

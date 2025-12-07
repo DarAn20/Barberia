@@ -63,21 +63,40 @@
         .action-links a:hover {
             color: #ffc107;
         }
+
+    .table-custom {
+        background-color: #212529;
+        color: white;
+    }
+
+        .table-custom thead th {
+            background-color: #343a40;
+            color: white;
+        }
+
+        .table-custom tbody tr:hover {
+            background-color: #495057;
+        }
+
 </style>
 
-<h1 class="page-title">Citas</h1>
+<div class="text-center mb-4">
+    <h1 class="page-title text-center d-inline-block">Citas</h1>
+    <p class="subtitle-muted">Gestione, edite y administre las citas en la barbería.</p>
+</div>
 
 <p>
-    <a asp-action="Create" class="btn-custom-primary shadow-sm">Crear Nueva</a>
+    <a asp-action="Create" class="btn-custom-primary shadow-sm">Nueva Cita</a>
 </p>
 
-<table class="table-custom">
+<table class="table table-striped table-hover table-custom align-middle mb-0">
     <thead>
         <tr>
             <th>@Html.DisplayNameFor(model => model.FechaHora)</th>
             <th>@Html.DisplayNameFor(model => model.cliente)</th>
             <th>@Html.DisplayNameFor(model => model.Servicio)</th>
-            <th></th>
+            <th>Precio Del Servicio</th>
+            <th>Acciones</th>
         </tr>
     </thead>
     <tbody>
@@ -85,12 +104,19 @@
         {
             <tr>
                 <td>@Html.DisplayFor(modelItem => item.FechaHora)</td>
-                <td>@Html.DisplayFor(modelItem => item.cliente.ClienteId)</td>
-                <td>@Html.DisplayFor(modelItem => item.Servicio.ServicioId)</td>
-                <td class="action-links">
-                    <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Detalles</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Eliminar</a>
+                <td>@Html.DisplayFor(modelItem => item.cliente.NombreCliente)</td>
+                <td>@Html.DisplayFor(modelItem => item.Servicio.NombreServicio)</td>
+                <td>@Html.DisplayFor(modelItem => item.Servicio.Precio)</td>
+                <td class="text-center action-buttons">
+                    <a asp-action="Edit" asp-route-id="@item.CitaId" class="btn btn-sm btn-outline-primary me-1">
+                        <i class="fa fa-edit"></i>
+                    </a>
+                    <a asp-action="Details" asp-route-id="@item.CitaId" class="btn btn-sm btn-outline-secondary me-1">
+                        <i class="fa fa-eye"></i>
+                    </a>
+                    <a asp-action="Delete" asp-route-id="@item.CitaId" class="btn btn-sm btn-outline-danger">
+                        <i class="fa fa-trash"></i>
+                    </a>
                 </td>
             </tr>
         }
