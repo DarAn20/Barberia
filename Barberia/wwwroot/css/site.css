@@ -26,3 +26,21 @@ body {
     font-size: .9rem;
     color: #6c757d;
 }
+
+.dropdown-item {
+    color: #212529 !important; /* letra negra */
+}
+
+    .dropdown-item:hover,
+    .dropdown-item:focus {
+        background-color: #f2f2f2 !important;
+        color: #000 !important;
+    }
+
+    .dropdown-item i {
+        color: #6c757d; /* Color gris bonito para el icono */
+    }
+
+    .dropdown-item:hover i {
+        color: #000;
+    }

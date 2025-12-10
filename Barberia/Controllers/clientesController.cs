@@ -1,15 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Barberia.Data;
+using Barberia.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Barberia.Data;
-using Barberia.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Barberia.Controllers
 {
+    [Authorize]
     public class clientesController : Controller
     {
         private readonly BarberiaContext _context;
@@ -56,11 +58,13 @@ namespace Barberia.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ClienteId,NombreCliente,Apellido,Telefono,Email")] cliente cliente)
         {
-            if (ModelState.IsValid)
-            {
+           
+            try {
                 _context.Add(cliente);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
+            }catch (Exception ex) { 
+                
             }
             return View(cliente);
         }
@@ -93,9 +97,7 @@ namespace Barberia.Controllers
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
-            {
-                try
+            try
                 {
                     _context.Update(cliente);
                     await _context.SaveChangesAsync();
@@ -112,7 +114,7 @@ namespace Barberia.Controllers
                     }
                 }
                 return RedirectToAction(nameof(Index));
-            }
+            
             return View(cliente);
         }
 

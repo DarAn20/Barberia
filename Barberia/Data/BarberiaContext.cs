@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Barberia.Data
 {
-    public class BarberiaContext : IdentityDbContext<Usuario>
+    public class BarberiaContext : IdentityDbContext<IdentityUser>
     {
         public BarberiaContext (DbContextOptions<BarberiaContext> options)
             : base(options)

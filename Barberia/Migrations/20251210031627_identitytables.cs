@@ -5,7 +5,7 @@
 namespace Barberia.Migrations
 {
     /// <inheritdoc />
-    public partial class Migracion6 : Migration
+    public partial class identitytables : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

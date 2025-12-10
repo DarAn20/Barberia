@@ -78,6 +78,14 @@
             background-color: #495057;
         }
 
+    .badge-price {
+        background-color: #ffe08a;
+        color: #000;
+        font-size: 1rem;
+        padding: 6px 12px;
+        border-radius: 8px;
+    }
+
 </style>
 
 <div class="text-center mb-4">
@@ -92,21 +100,23 @@
 <table class="table table-striped table-hover table-custom align-middle mb-0">
     <thead>
         <tr>
-            <th>@Html.DisplayNameFor(model => model.FechaHora)</th>
-            <th>@Html.DisplayNameFor(model => model.cliente)</th>
-            <th>@Html.DisplayNameFor(model => model.Servicio)</th>
-            <th>Precio Del Servicio</th>
-            <th>Acciones</th>
+            <th class="text-center">@Html.DisplayNameFor(model => model.FechaHora)</th>
+            <th class="text-center">@Html.DisplayNameFor(model => model.cliente)</th>
+            <th class="text-center">@Html.DisplayNameFor(model => model.cliente.Email)</th>
+            <th class="text-center">@Html.DisplayNameFor(model => model.Servicio)</th>
+            <th class="text-center">Precio Del Servicio</th>
+            <th class="text-center">Acciones</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
             <tr>
-                <td>@Html.DisplayFor(modelItem => item.FechaHora)</td>
-                <td>@Html.DisplayFor(modelItem => item.cliente.NombreCliente)</td>
-                <td>@Html.DisplayFor(modelItem => item.Servicio.NombreServicio)</td>
-                <td>@Html.DisplayFor(modelItem => item.Servicio.Precio)</td>
+                <td class="text-center">@Html.DisplayFor(modelItem => item.FechaHora)</td>
+                <td class ="text-center">@Html.DisplayFor(modelItem => item.cliente.NombreCliente)</td>
+                <td class="text-center">@Html.DisplayFor(modelItem => item.cliente.Email)</td>
+                <td class="text-center">@Html.DisplayFor(modelItem => item.Servicio.NombreServicio)</td>
+                <td class="text-center"><span class="badge-price">₡ @Html.DisplayFor(modelItem => item.Servicio.Precio)</span></td>
                 <td class="text-center action-buttons">
                     <a asp-action="Edit" asp-route-id="@item.CitaId" class="btn btn-sm btn-outline-primary me-1">
                         <i class="fa fa-edit"></i>

@@ -4,10 +4,12 @@ using Barberia.Data;
 using Microsoft.AspNetCore.Identity;
 using Barberia.Models;
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddDbContext<BarberiaContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("BarberiaContext") ?? throw new InvalidOperationException("Connection string 'BarberiaContext' not found.")));
+builder.Services.AddDbContext<BarberiaContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("BarberiaContext") ?? throw new InvalidOperationException("Connection string 'BarberiaContext' not found.")));
 
-builder.Services.AddDefaultIdentity<Usuario>(options => options.SignIn.RequireConfirmedAccount = false).AddEntityFrameworkStores<BarberiaContext>();
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false).AddEntityFrameworkStores<BarberiaContext>();
+
+
+
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -21,14 +23,15 @@ if (!app.Environment.IsDevelopment())
     app.UseExceptionHandler("/Home/Error");
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
-}
+} 
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseAuthentication();
 app.UseAuthorization();
+
 
 app.MapControllerRoute(
     name: "default",

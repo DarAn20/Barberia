@@ -1,14 +1,16 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Barberia.Data;
+﻿using Barberia.Data;
 using Barberia.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 
 
 
 namespace Barberia.Controllers
 
 {
+    [Authorize]
     public class CitasController : Controller
     {
         private readonly BarberiaContext _context;
@@ -49,8 +51,9 @@ namespace Barberia.Controllers
         // GET: Citas/Create
         public IActionResult Create()
         {
-            ViewData["ServicioId"] = new SelectList(_context.Servicio, "ServicioId", "ServicioId");
-            ViewData["ClienteId"] = new SelectList(_context.cliente, "ClienteId", "ClienteId");
+            ViewData["NombreServicio"] = new SelectList(_context.Servicio, "ServicioId", "NombreServicio");
+            ViewData["NombreCliente"] = new SelectList(_context.cliente.Select(c => new{ c.ClienteId,NombreMostrar = c.NombreCliente + " — " + c.Email}), "ClienteId","NombreMostrar");
+
             return View();
         }
 
@@ -59,22 +62,28 @@ namespace Barberia.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CitaId,FechaHora,ClienteId,ServicioId")] Cita cita)
+        public async Task<IActionResult> Create([Bind("CitaId,FechaHora,ClienteId,ServicioId,Email")] Cita cita)
         {
-            try 
-            {    
+            //valida fercha al crear 
+            if (cita.FechaHora < DateTime.Now)
+            {
+                ModelState.AddModelError("", "La fecha debe ser igual o posterior a hoy.");
+            }
+            else
+            {
+                try
+                {
                     _context.Add(cita);
                     await _context.SaveChangesAsync();
                     return RedirectToAction(nameof(Index));
-                
+                }
+                catch (DbUpdateException)
+                {
+                    ModelState.AddModelError("", "Error al guardar los cambios.");
+                }
             }
-            catch (DbUpdateException /* ex */)
-            {
-                //Log the error (uncomment ex variable name and write a log.)
-                ModelState.AddModelError("", "No se pudo guardar los cambios. Intente de nuevo, y si el problema persiste vea al administrador del sistema.");
-            }
-            ViewData["ServicioId"] = new SelectList(_context.Servicio, "ServicioId", "ServicioId", cita.ServicioId);
-            ViewData["ClienteId"] = new SelectList(_context.cliente, "ClienteId", "ClienteId", cita.ClienteId);
+            ViewData["NombreServicio"] = new SelectList(_context.Servicio, "ServicioId", "NombreServicio", cita.ServicioId);
+            ViewData["NombreCliente"] = new SelectList(_context.cliente.Select(c => new { c.ClienteId, NombreMostrar = c.NombreCliente + " — " + c.Email }), "ClienteId", "NombreMostrar");
             return View(cita);
         }
 
@@ -91,8 +100,8 @@ namespace Barberia.Controllers
             {
                 return NotFound();
             }
-            ViewData["ServicioId"] = new SelectList(_context.Servicio, "ServicioId", "ServicioId", cita.ServicioId);
-            ViewData["ClienteId"] = new SelectList(_context.cliente, "ClienteId", "ClienteId", cita.ClienteId);
+            ViewData["NombreServicio"] = new SelectList(_context.Servicio, "ServicioId", "NombreServicio", cita.ServicioId);
+          //  ViewData["ClienteId"] = new SelectList(_context.cliente, "ClienteId", "NombreCliente", cita.ClienteId);
             return View(cita);
         }
 
@@ -104,35 +113,29 @@ namespace Barberia.Controllers
         public async Task<IActionResult> Edit(int id, [Bind("CitaId,FechaHora,ClienteId,ServicioId")] Cita cita)
         {
             if (id != cita.CitaId)
-            {
                 return NotFound();
+
+            // Validar fecha
+            if (cita.FechaHora < DateTime.Now)
+            {
+                ModelState.AddModelError("FechaHora", "La fecha debe ser hoy o posterior.");
+                ViewData["NombreServicio"] = new SelectList(_context.Servicio, "ServicioId", "NombreServicio", cita.ServicioId);
+               // ViewData["ClienteId"] = new SelectList(_context.cliente, "ClienteId", "NombreCliente", cita.ClienteId);
+                return View(cita);
             }
 
-            if (ModelState.IsValid)
-            { 
-                try
-                {
-                    _context.Update(cita);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!CitaExists(cita.CitaId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            // Si el modelo no es válido, vuelve a mostrar el formulario con los datos actuales
-            ViewData["ServicioId"] = new SelectList(_context.Servicio, "ServicioId", "ServicioId", cita.ServicioId);
-            ViewData["ClienteId"] = new SelectList(_context.cliente, "ClienteId", "ClienteId", cita.ClienteId);
-            return View(cita);
-            ////////////////////////////////////////
+            // Obtener cita original
+            var citaDb = await _context.Cita.FindAsync(id);
+
+            // Actualizar solo lo permitido
+            citaDb.FechaHora = cita.FechaHora;
+            citaDb.ServicioId = cita.ServicioId;
+
+            await _context.SaveChangesAsync();
+
+            //return View(cita);
+            return RedirectToAction(nameof(Index));
+
         }
 
         // GET: Citas/Delete/5

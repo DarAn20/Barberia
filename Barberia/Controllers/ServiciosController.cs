@@ -1,15 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Barberia.Data;
+using Barberia.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Barberia.Data;
-using Barberia.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Barberia.Controllers
 {
+
+    //ya quedo bien para ver si se actuazliza git
     public class ServiciosController : Controller
     {
         private readonly BarberiaContext _context;
@@ -44,6 +47,7 @@ namespace Barberia.Controllers
         }
 
         // GET: Servicios/Create
+        [Authorize]//no da acceso a esta parte s no esta logueado
         public IActionResult Create()
         {
             return View();
@@ -52,6 +56,7 @@ namespace Barberia.Controllers
         // POST: Servicios/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize]//no da acceso a esta parte s no esta logueado
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ServicioId,NombreServicio,Descripcion,Precio")] Servicio servicio)
@@ -66,6 +71,7 @@ namespace Barberia.Controllers
         }
 
         // GET: Servicios/Edit/5
+        [Authorize]//no da acceso a esta parte s no esta logueado
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -84,6 +90,7 @@ namespace Barberia.Controllers
         // POST: Servicios/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize]//no da acceso a esta parte s no esta logueado
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("ServicioId,NombreServicio,Descripcion,Precio")] Servicio servicio)
@@ -117,6 +124,7 @@ namespace Barberia.Controllers
         }
 
         // GET: Servicios/Delete/5
+        [Authorize]//no da acceso a esta parte s no esta logueado
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -135,6 +143,7 @@ namespace Barberia.Controllers
         }
 
         // POST: Servicios/Delete/5
+        [Authorize]//no da acceso a esta parte s no esta logueado
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
