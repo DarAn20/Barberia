@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Barberia.Controllers
 
 {
+    //ya quedo bien para ver si se actuazliza git
     [Authorize]
     public class CitasController : Controller
     {

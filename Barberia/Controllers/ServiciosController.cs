@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 namespace Barberia.Controllers
 {
 
-    //ya quedo bien para ver si se actuazliza git
+    //ya quedo bien para ver si se actuazliza git t
     public class ServiciosController : Controller
     {
         private readonly BarberiaContext _context;

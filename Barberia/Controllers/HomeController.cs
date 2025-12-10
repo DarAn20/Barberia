@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Barberia.Controllers
 {
-   
+    //ya quedo bien para ver si se actuazliza git
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
