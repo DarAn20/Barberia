@@ -71,7 +71,7 @@ namespace Barberia.Controllers
             {
                 ModelState.AddModelError(
                     "",
-                    "La fecha debe ser hoy o dentro de los próximos 7 días."
+                    "La fecha debe ser hoy o dentro de los próximos 8 días."
                 );
             }
             else
@@ -124,7 +124,7 @@ namespace Barberia.Controllers
             // Validar fecha
             if (cita.FechaHora < DateTime.Now || cita.FechaHora > DateTime.Now.AddDays(8))
             {
-                ModelState.AddModelError("FechaHora", "La fecha debe ser hoy o posterior.\n La fecha debe ser menor a 8 dias.");
+                ModelState.AddModelError("FechaHora", "La fecha debe ser hoy o dentro de los próximos 8 días.");
                 ViewData["NombreServicio"] = new SelectList(_context.Servicio, "ServicioId", "NombreServicio", cita.ServicioId);
                 // ViewData["ClienteId"] = new SelectList(_context.cliente, "ClienteId", "NombreCliente", cita.ClienteId);
                 return View(cita);
