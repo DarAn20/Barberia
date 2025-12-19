@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Barberia.Migrations
 {
     /// <inheritdoc />
-    public partial class MILOCAL : Migration
+    public partial class Migracion1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

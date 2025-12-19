@@ -2,6 +2,13 @@
     #login-partial a {
         color: white !important;
     }
+
+    .footer-fixed {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+    }
 </style>
 
 <!DOCTYPE html>
@@ -60,7 +67,7 @@
     </div>
 
     @* FOOTER *@
-    <footer class="bg-dark text-light py-3 mt-4 border-top border-secondary">
+    <footer class="bg-dark text-light py-3 mt-4 border-top border-secondary footer-fixed">
         <div class="container d-flex justify-content-between align-items-center">
             <div>
                 © @DateTime.Now.Year Barbería El Corte — <span class="text-warning">Elegancia y estilo</span>

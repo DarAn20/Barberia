@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using System.Runtime.ConstrainedExecution;
 
 
 
@@ -65,10 +66,13 @@ namespace Barberia.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("CitaId,FechaHora,ClienteId,ServicioId,Email")] Cita cita)
         {
-            //valida fercha al crear 
-            if (cita.FechaHora < DateTime.Now)
+            if (cita.FechaHora < DateTime.Now ||
+         cita.FechaHora > DateTime.Now.AddDays(8))
             {
-                ModelState.AddModelError("", "La fecha debe ser igual o posterior a hoy.");
+                ModelState.AddModelError(
+                    "",
+                    "La fecha debe ser hoy o dentro de los próximos 7 días."
+                );
             }
             else
             {
@@ -83,6 +87,7 @@ namespace Barberia.Controllers
                     ModelState.AddModelError("", "Error al guardar los cambios.");
                 }
             }
+
             ViewData["NombreServicio"] = new SelectList(_context.Servicio, "ServicioId", "NombreServicio", cita.ServicioId);
             ViewData["NombreCliente"] = new SelectList(_context.cliente.Select(c => new { c.ClienteId, NombreMostrar = c.NombreCliente + " — " + c.Email }), "ClienteId", "NombreMostrar");
             return View(cita);
@@ -117,16 +122,18 @@ namespace Barberia.Controllers
                 return NotFound();
 
             // Validar fecha
-            if (cita.FechaHora < DateTime.Now)
+            if (cita.FechaHora < DateTime.Now || cita.FechaHora > DateTime.Now.AddDays(8))
             {
-                ModelState.AddModelError("FechaHora", "La fecha debe ser hoy o posterior.");
+                ModelState.AddModelError("FechaHora", "La fecha debe ser hoy o posterior.\n La fecha debe ser menor a 8 dias.");
                 ViewData["NombreServicio"] = new SelectList(_context.Servicio, "ServicioId", "NombreServicio", cita.ServicioId);
-               // ViewData["ClienteId"] = new SelectList(_context.cliente, "ClienteId", "NombreCliente", cita.ClienteId);
+                // ViewData["ClienteId"] = new SelectList(_context.cliente, "ClienteId", "NombreCliente", cita.ClienteId);
                 return View(cita);
-            }
 
-            // Obtener cita original
-            var citaDb = await _context.Cita.FindAsync(id);
+            }
+           
+
+                // Obtener cita original
+                var citaDb = await _context.Cita.FindAsync(id);
 
             // Actualizar solo lo permitido
             citaDb.FechaHora = cita.FechaHora;

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Barberia.Migrations
 {
     [DbContext(typeof(BarberiaContext))]
-    [Migration("20251210031142_MILOCAL")]
-    partial class MILOCAL
+    [Migration("20251219054725_Migracion1")]
+    partial class Migracion1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
